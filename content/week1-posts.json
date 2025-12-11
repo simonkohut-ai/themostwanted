@@ -1,0 +1,48 @@
+{
+  "week": 1,
+  "brand": "FordFofer",
+  "aesthetic": "Neobrutalism + Cyber Pink",
+  "posts": [
+    {
+      "id": 1,
+      "pillar": "P1_BILIONARSKA_KULTURA",
+      "slogan_vizual": "1.2 MILIARDY. FAKT. NIČ VIAC.",
+      "popis_ig": "Naše čísla nie sú koncept. Sú fakt. FordFofer je destinácia, kde sa seriózny kapitál stretáva s nekompromisnou logikou. Ak nie ste pripravení na miliardy, nehľadajte nás.\n\nPotrebujete povolenie pre vstup. Čas vyprší.",
+      "hashtagy": ["#1Point2Billion", "#UnicornStatus", "#AIcapital", "#BillionaireClub", "#FordFofer", "#FinTechDominance", "#SerioznyKapital", "#InvestmentFuture", "#CapitalArchitects", "#Exkluzivita"],
+      "schedule": "Monday 09:00"
+    },
+    {
+      "id": 2,
+      "pillar": "P2_AI_LOGIKA",
+      "slogan_vizual": "EMÓCIA JE CHYBA. LOGIKA VYHRÁVA.",
+      "popis_ig": "Vylúčenie ľudskej chyby je našou najväčšou devízou. Naše AI agenty neobchodujú s pocitmi ani s únavou. Len s dátami. Len s čistou, 24/7 efektivitou. Ak vás brzdí ľudská slabosť, nepatríte sem.\n\nNastúpte do systému, ktorý nespí.",
+      "hashtagy": ["#EliminateError", "#AILogic", "#24_7Profit", "#NoHumanBias", "#FordFofer", "#AutomatedCapital", "#PrecisionTrading", "#FinTechRevolution", "#Algorithmic", "#DataDriven"],
+      "schedule": "Tuesday 18:00"
+    },
+    {
+      "id": 3,
+      "pillar": "P3_INFRASTRUKTURA",
+      "slogan_vizual": "ARCHITEKT ÚDAJOV. STAVIAME BUDÚCNOSŤ.",
+      "popis_ig": "FordFofer nie je aplikácia. Je to infraštruktúra. Sme architekti, ktorí stavajú digitálne základy pre kapitál, ktorý bude definovať trhy na ďalších 50 rokov. Ak nevidíte za horizont, sme pre vás príliš rýchli.\n\nInvestujte do architektúry, nie do nápadov. Kontaktujte nás pre prístup.",
+      "hashtagy": ["#InfraArchitekt", "#FutureOfFinance", "#DigitalArchitecture", "#SystematicTrading", "#FordFoferVision", "#CapitalSystem", "#BlockChainIntegration", "#TechLeader", "#Vizionari", "#Innovation"],
+      "schedule": "Thursday 09:00"
+    },
+    {
+      "id": 4,
+      "pillar": "P1_BILIONARSKA_KULTURA",
+      "slogan_vizual": "RÝCHLOSŤ JE KAPITÁL. KAPITÁL JE RÝCHLOSŤ.",
+      "popis_ig": "Rast nášho $1.2B kapitálu nie je lineárny. Je exponenciálny. Ponúkame prístup k mechanizmu, ktorý beží na maximálne otáčky. Spomalenie nepoznáme. Ak hľadáte stagnáciu, hľadajte inde.\n\nZvýšte svoje tempo. Pripravte sa na výsledky.",
+      "hashtagy": ["#AcceleratedGrowth", "#SpeedOfCapital", "#MillionaireMindset", "#HighNetWorth", "#FordFofer", "#Exponential", "#FinancialSuccess", "#ExclusiveAccess", "#InvestmentGoals", "#TrhovaDominancia"],
+      "schedule": "Friday 18:00"
+    },
+    {
+      "id": 5,
+      "pillar": "P2_AI_LOGIKA",
+      "slogan_vizual": "AI NIKDY NESPÍ. A VY?",
+      "popis_ig": "Zatiaľ čo svet odpočíva, naša AI armáda obchoduje. 24 hodín denne, 7 dní v týždni. Logika nepozná oddych. To je záruka efektivity, ktorú vám žiadny ľudský tím neponúkne.\n\nDoprajte si spánok. Profit nechajte na nás.",
+      "hashtagy": ["#AISleepless", "#24_7Logic", "#FordFoferSystem", "#ZeroDowntime", "#FinancialOptimization", "#CapitalRobot", "#AIadvantage", "#TechFin", "#InstantProfit", "#WorkSmart"],
+      "schedule": "Sunday 12:00"
+    }
+  ]
+}
+

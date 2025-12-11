@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FordFofer | $1.2B Autonomous Capital Architect</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        /* === NEOBRUTALISM CORE === */
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --cyber-pink: #FF004D;
+            --dark-gray: #0a0a0a;
+            --border: 4px solid var(--black);
+            --shadow: 8px 8px 0px 0px var(--black);
+            --shadow-pink: 8px 8px 0px 0px var(--cyber-pink);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--black);
+            color: var(--white);
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        /* === 3D CANVAS === */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* === UI OVERLAY === */
+        #ui-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+        }
+
+        /* === BRUTAL BOX === */
+        .brutal-box {
+            background: var(--white);
+            border: var(--border);
+            box-shadow: var(--shadow);
+            color: var(--black);
+            pointer-events: auto;
+        }
+
+        .brutal-box-dark {
+            background: var(--black);
+            border: 4px solid var(--cyber-pink);
+            box-shadow: var(--shadow-pink);
+            color: var(--white);
+            pointer-events: auto;
+        }
+
+        /* === HEADER === */
+        .header {
+            max-width: 600px;
+            padding: 20px 28px;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+
+        @keyframes slideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-accent {
+            color: var(--cyber-pink);
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+
+        .valuation {
+            display: inline-block;
+            background: var(--cyber-pink);
+            color: var(--black);
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* === STATS BAR === */
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: var(--black);
+            color: var(--cyber-pink);
+            padding: 8px 16px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 2px solid var(--black);
+        }
+
+        /* === BOTTOM PANEL === */
+        .bottom-panel {
+            max-width: 700px;
+            padding: 24px 28px;
+            align-self: flex-end;
+            animation: slideUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            color: var(--cyber-pink);
+        }
+
+        .pitch-text {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .pitch-text strong {
+            color: var(--cyber-pink);
+            background: var(--black);
+            padding: 2px 6px;
+        }
+
+        /* === CTA BUTTON === */
+        .cta-button {
+            background: var(--cyber-pink);
+            color: var(--black);
+            border: var(--border);
+            padding: 16px 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 6px 6px 0px 0px var(--black);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0px 0px var(--black);
+        }
+
+        .cta-button:active {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0px 0px var(--black);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* === AUDIO PLAYER === */
+        #audio-player {
+            width: 100%;
+            margin-top: 16px;
+            display: none;
+        }
+
+        #audio-player.visible {
+            display: block;
+        }
+
+        /* === SPINNER === */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--black);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .spinner.active {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* === STATUS === */
+        .status-message {
+            font-size: 0.7rem;
+            margin-top: 12px;
+            color: #ff3333;
+            font-weight: 700;
+        }
+
+        /* === FOOTER NOTE === */
+        .footer-note {
+            font-size: 0.65rem;
+            margin-top: 16px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* === FLOATING ELEMENTS === */
+        .floating-stat {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-stat:nth-child(1) {
+            top: 30%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-stat:nth-child(2) {
+            top: 50%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        .floating-stat:nth-child(3) {
+            top: 70%;
+            right: 3%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(2deg); opacity: 0.6; }
+        }
+
+        .floating-stat span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--cyber-pink);
+            opacity: 0.15;
+            text-shadow: 0 0 40px var(--cyber-pink);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            #ui-overlay {
+                padding: 16px;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .header, .bottom-panel {
+                max-width: 100%;
+                padding: 16px 20px;
+            }
+            
+            .pitch-text {
+                font-size: 0.8rem;
+            }
+
+            .floating-stat {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Floating Background Stats -->
+    <div class="floating-stat"><span>$1.2B</span></div>
+    <div class="floating-stat"><span>24/7</span></div>
+    <div class="floating-stat"><span>AI</span></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-overlay">
+        <!-- Header -->
+        <div class="header brutal-box">
+            <div class="logo">
+                <span>FORD</span><span class="logo-accent">FOFER</span>
+            </div>
+            <p class="tagline">Digitálny Architekt Autonómneho Kapitálu</p>
+            <div class="valuation">◆ $1.2 MILIARDY REPREZENTUJE ◆</div>
+            <div class="stats-bar">
+                <span class="stat">AI AGENTI</span>
+                <span class="stat">24/7 LOGIKA</span>
+                <span class="stat">0% CHÝB</span>
+            </div>
+        </div>
+
+        <!-- Bottom Panel -->
+        <div class="bottom-panel brutal-box">
+            <p class="panel-title">▸ Video Pitch Explainer (SK)</p>
+            
+            <p class="pitch-text">
+                <strong>STOP!</strong> Už žiadne nudné startupové kecy. Poďme na fakty. 
+                FordFofer — Sme digitálny architekt autonómneho kapitálu. Predstavte si: 
+                <strong>Armáda AI agentov</strong>, ktorú riadi Šimon Kohút, neobchodujú 
+                s lístkami na kávu, ale s <strong>miliardami!</strong> Náš softvér je 
+                absolútna eliminácia ľudskej chyby. Funkcionalita je naša viera.
+            </p>
+
+            <button id="play-button" class="cta-button" onclick="generateAudio()">
+                <span id="button-text">▶ PREHRAJ PITCH</span>
+                <div id="loading-spinner" class="spinner"></div>
+            </button>
+
+            <audio id="audio-player" controls></audio>
+
+            <div id="status-message" class="status-message"></div>
+
+            <p class="footer-note">↻ Ťahajte myšou pre rotáciu 3D architektúry</p>
+        </div>
+    </div>
+
+    <!-- Hidden Script Text for TTS -->
+    <p id="script-text" style="display:none;">
+        STOP! Už žiadne nudné startupové kecy. Poďme na fakty. FordFofer: Sme digitálny architekt autonómneho kapitálu. Predstavte si: Armáda AI agentov, ktorú riadi Šimon Kohút, neobchodujú s lístkami na kávu, ale s miliardami! Náš softvér je absolútna eliminácia ľudskej chyby. Funkcionalita je naša viera. Hodnota? Už teraz máme potvrdených $1.2 miliardy! Prečo? Staviame infraštruktúru budúcnosti. To je FordFofer. Vstupenka do najlepšej investície. Rýchlo!
+    </p>
+
+    <script>
+        // ============================================
+        // THREE.JS 3D VISUALIZATION
+        // ============================================
+        
+        let scene, camera, renderer;
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        const AGENT_COUNT = 80;
+        const agents = [];
+        const connections = [];
+
+        function init3D() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            scene.fog = new THREE.Fog(0x000000, 50, 150);
+
+            // Camera
+            const aspect = window.innerWidth / window.innerHeight;
+            camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+            camera.position.set(0, 20, 50);
+            camera.lookAt(0, 0, 0);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+            scene.add(ambientLight);
+
+            const pinkLight = new THREE.DirectionalLight(0xFF004D, 2);
+            pinkLight.position.set(30, 50, 30);
+            scene.add(pinkLight);
+
+            const blueLight = new THREE.DirectionalLight(0x00D4FF, 1);
+            blueLight.position.set(-30, 30, -30);
+            scene.add(blueLight);
+
+            // Grid
+            const gridHelper = new THREE.GridHelper(200, 100, 0x111111, 0x080808);
+            scene.add(gridHelper);
+
+            // Create Agents (Capital Modules)
+            createAgents();
+
+            // Create Connection Lines
+            createConnections();
+
+            // Event Listeners
+            window.addEventListener('resize', onWindowResize);
+            renderer.domElement.addEventListener('mousedown', onMouseDown);
+            renderer.domElement.addEventListener('mousemove', onMouseMove);
+            renderer.domElement.addEventListener('mouseup', onMouseUp);
+            renderer.domElement.addEventListener('mouseleave', onMouseUp);
+
+            // Touch support
+            renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+            renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+            renderer.domElement.addEventListener('touchend', onMouseUp);
+
+            animate();
+        }
+
+        function createAgents() {
+            const geometries = [
+                new THREE.BoxGeometry(2, 2, 2),
+                new THREE.BoxGeometry(1.5, 3, 1.5),
+                new THREE.BoxGeometry(3, 1, 3),
+            ];
+
+            for (let i = 0; i < AGENT_COUNT; i++) {
+                const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+                
+                // Emissive material for glow effect
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0x000000,
+                    emissive: 0xFF004D,
+                    emissiveIntensity: Math.random() * 0.5 + 0.3,
+                    metalness: 0.8,
+                    roughness: 0.2,
+                });
+
+                const agent = new THREE.Mesh(geometry, material);
+                
+                // Position in a circular pattern
+                const radius = Math.random() * 80;
+                const angle = Math.random() * Math.PI * 2;
+                agent.position.x = Math.cos(angle) * radius;
+                agent.position.y = Math.random() * 15 + 1;
+                agent.position.z = Math.sin(angle) * radius;
+
+                // Store animation data
+                agent.userData = {
+                    baseY: agent.position.y,
+                    speed: Math.random() * 0.03 + 0.01,
+                    rotSpeed: (Math.random() - 0.5) * 0.02,
+                    phase: Math.random() * Math.PI * 2,
+                    pulseSpeed: Math.random() * 2 + 1,
+                };
+
+                agents.push(agent);
+                scene.add(agent);
+            }
+        }
+
+        function createConnections() {
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0xFF004D,
+                transparent: true,
+                opacity: 0.15,
+            });
+
+            // Create random connections between nearby agents
+            for (let i = 0; i < 40; i++) {
+                const a1 = agents[Math.floor(Math.random() * agents.length)];
+                const a2 = agents[Math.floor(Math.random() * agents.length)];
+                
+                if (a1 !== a2) {
+                    const geometry = new THREE.BufferGeometry().setFromPoints([
+                        a1.position,
+                        a2.position
+                    ]);
+                    const line = new THREE.Line(geometry, lineMaterial);
+                    line.userData = { agent1: a1, agent2: a2 };
+                    connections.push(line);
+                    scene.add(line);
+                }
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseDown(event) {
+            isDragging = true;
+            previousMousePosition.x = event.clientX;
+            previousMousePosition.y = event.clientY;
+        }
+
+        function onMouseUp() {
+            isDragging = false;
+        }
+
+        function onMouseMove(event) {
+            if (!isDragging) return;
+
+            const deltaX = event.clientX - previousMousePosition.x;
+            const deltaY = event.clientY - previousMousePosition.y;
+
+            // Rotate camera around center
+            const rotationY = deltaX * 0.005;
+            camera.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationY);
+
+            // Vertical rotation (clamped)
+            const currentAngle = Math.atan2(camera.position.y, 
+                Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2));
+            const newAngle = currentAngle - deltaY * 0.003;
+            const clampedAngle = Math.max(-0.8, Math.min(1.2, newAngle));
+            
+            const distance = camera.position.length();
+            const horizontalDist = Math.cos(clampedAngle) * distance;
+            camera.position.y = Math.sin(clampedAngle) * distance;
+            
+            const currentHorizontal = Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2);
+            if (currentHorizontal > 0) {
+                camera.position.x *= horizontalDist / currentHorizontal;
+                camera.position.z *= horizontalDist / currentHorizontal;
+            }
+
+            camera.lookAt(0, 0, 0);
+            previousMousePosition.x = event.clientX;
+            previousMousePosition.y = event.clientY;
+        }
+
+        function onTouchStart(event) {
+            event.preventDefault();
+            if (event.touches.length === 1) {
+                isDragging = true;
+                previousMousePosition.x = event.touches[0].clientX;
+                previousMousePosition.y = event.touches[0].clientY;
+            }
+        }
+
+        function onTouchMove(event) {
+            event.preventDefault();
+            if (!isDragging || event.touches.length !== 1) return;
+            
+            const touch = event.touches[0];
+            onMouseMove({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = performance.now() * 0.001;
+
+            // Animate agents
+            agents.forEach((agent, i) => {
+                const { baseY, speed, rotSpeed, phase, pulseSpeed } = agent.userData;
+                
+                // Floating motion
+                agent.position.y = baseY + Math.sin(time * speed * 10 + phase) * 2;
+                
+                // Rotation
+                agent.rotation.x += rotSpeed;
+                agent.rotation.y += rotSpeed * 0.7;
+
+                // Pulse emissive intensity
+                agent.material.emissiveIntensity = 0.3 + Math.sin(time * pulseSpeed + phase) * 0.2;
+            });
+
+            // Update connection lines
+            connections.forEach(line => {
+                const positions = line.geometry.attributes.position;
+                if (positions) {
+                    positions.setXYZ(0, line.userData.agent1.position.x, 
+                        line.userData.agent1.position.y, line.userData.agent1.position.z);
+                    positions.setXYZ(1, line.userData.agent2.position.x, 
+                        line.userData.agent2.position.y, line.userData.agent2.position.z);
+                    positions.needsUpdate = true;
+                }
+            });
+
+            // Auto-rotate camera when not dragging
+            if (!isDragging) {
+                camera.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.001);
+                camera.lookAt(0, 0, 0);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Initialize 3D on load
+        window.addEventListener('load', init3D);
+
+        // ============================================
+        // TTS AUDIO GENERATION (Gemini API)
+        // ============================================
+        
+        // NOTE: Replace with your actual API key
+        const API_KEY = 'YOUR_GEMINI_API_KEY';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcm16, sampleRate = 24000) {
+            const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+            const view = new DataView(buffer);
+
+            // RIFF header
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + pcm16.length * 2, true);
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true); // PCM
+            view.setUint16(22, 1, true); // Mono
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, pcm16.length * 2, true);
+
+            // PCM data
+            let offset = 44;
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset, pcm16[i], true);
+                offset += 2;
+            }
+
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        async function generateAudio() {
+            const playButton = document.getElementById('play-button');
+            const buttonText = document.getElementById('button-text');
+            const spinner = document.getElementById('loading-spinner');
+            const audioPlayer = document.getElementById('audio-player');
+            const statusMessage = document.getElementById('status-message');
+            const scriptText = document.getElementById('script-text').textContent.trim();
+
+            playButton.disabled = true;
+            buttonText.textContent = 'GENERUJEM...';
+            spinner.classList.add('active');
+            audioPlayer.classList.remove('visible');
+            statusMessage.textContent = '';
+
+            const payload = {
+                contents: [{
+                    parts: [{ 
+                        text: `Say cheerfully and with an upbeat, confident tone in Slovak: ${scriptText}` 
+                    }]
+                }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Laomedeia" }
+                        }
+                    }
+                }
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                const part = candidate?.content?.parts?.find(p => 
+                    p.inlineData && p.inlineData.mimeType?.startsWith('audio'));
+
+                if (!part?.inlineData?.data) {
+                    throw new Error('No audio data received');
+                }
+
+                const audioData = part.inlineData.data;
+                const mimeType = part.inlineData.mimeType;
+                const rateMatch = mimeType.match(/rate=(\d+)/);
+                const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
+
+                const pcmDataBuffer = base64ToArrayBuffer(audioData);
+                const pcm16 = new Int16Array(pcmDataBuffer);
+                const wavBlob = pcmToWav(pcm16, sampleRate);
+
+                const audioUrl = URL.createObjectURL(wavBlob);
+                audioPlayer.src = audioUrl;
+                audioPlayer.classList.add('visible');
+                audioPlayer.play();
+
+                buttonText.textContent = '✓ PREHRÁVANIE';
+
+            } catch (error) {
+                statusMessage.textContent = `Chyba: ${error.message}. Pridajte API kľúč.`;
+                buttonText.textContent = '▶ PREHRAJ PITCH';
+            } finally {
+                playButton.disabled = false;
+                spinner.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
+
