@@ -1,5 +1,20 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "trailingSlash": false
+  "version": 2,
+  "name": "fordfofer",
+  "builds": [
+    {
+      "src": "landing-page/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "automation/MARKETING_DASHBOARD.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/landing-page/index.html" },
+    { "src": "/dashboard", "dest": "/automation/MARKETING_DASHBOARD.html" },
+    { "src": "/(.*)", "dest": "/landing-page/$1" }
+  ]
 }
+

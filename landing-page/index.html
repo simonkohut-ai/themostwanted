@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORD FOFER | $1.2B Autonomous Capital</title>
+    <meta name="description" content="FordFofer - Digitálny architekt autonómneho kapitálu. AI agenti obchodujúci 24/7.">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="FORD FOFER | $1.2 BILLION">
+    <meta property="og:description" content="AI agenti. Zero emócií. Nekonečný kapitál.">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@700;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --cyber-pink: #FF004D;
+            --dark-gray: #0a0a0a;
+            --border: 4px solid var(--white);
+            --shadow: 8px 8px 0px 0px var(--cyber-pink);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,0,77,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,0,77,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 15vw, 10rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--white) 0%, var(--cyber-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+        
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--cyber-pink);
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+        
+        .value-box {
+            margin-top: 3rem;
+            padding: 2rem 4rem;
+            border: var(--border);
+            box-shadow: var(--shadow);
+            background: var(--black);
+            text-align: center;
+        }
+        
+        .value-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--cyber-pink);
+        }
+        
+        .value-label {
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+        
+        /* Countdown Timer */
+        .countdown-section {
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .countdown-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            color: var(--cyber-pink);
+            margin-bottom: 1rem;
+        }
+        
+        .countdown {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .countdown-item {
+            background: var(--dark-gray);
+            border: 2px solid var(--cyber-pink);
+            padding: 1rem 1.5rem;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .countdown-unit {
+            font-size: 0.625rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            margin-top: 3rem;
+            padding: 1.5rem 4rem;
+            background: var(--cyber-pink);
+            color: var(--black);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0px 0px var(--white);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--dark-gray);
+            border: var(--border);
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--cyber-pink);
+        }
+        
+        .feature-text {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: var(--cyber-pink);
+            color: var(--black);
+        }
+        
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            margin-top: 0.5rem;
+        }
+        
+        /* Challenge Section */
+        .challenge {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .challenge-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            border: var(--border);
+            box-shadow: var(--shadow);
+            background: var(--black);
+        }
+        
+        .challenge-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+        
+        .challenge-reward {
+            font-size: 3rem;
+            color: var(--cyber-pink);
+            font-weight: 700;
+            margin: 1.5rem 0;
+        }
+        
+        .challenge-text {
+            font-size: 0.875rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+        
+        .social-links a:hover {
+            color: var(--cyber-pink);
+        }
+        
+        .copyright {
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .value-box {
+                padding: 1.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="logo-text">FORDFOFER</h1>
+        <p class="tagline">Autonomous Capital Architecture</p>
+        
+        <div class="value-box">
+            <div class="value-number">$1.2B</div>
+            <div class="value-label">CAPITAL CAPACITY</div>
+        </div>
+        
+        <div class="countdown-section">
+            <div class="countdown-label">PRÍSTUPOVÉ OKNO SA ZATVÁRA</div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">72</div>
+                    <div class="countdown-unit">HODÍN</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-unit">MINÚT</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-unit">SEKÚND</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="https://instagram.com/fordfofer" class="cta-button" target="_blank">
+            ZÍSKAJ PRÍSTUP →
+        </a>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI AGENTI</h3>
+                <p class="feature-text">Armáda autonómnych AI agentov obchoduje 24/7 bez ľudskej intervencie. Žiadne emócie. Žiadne chyby. Len čistá logika.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">24/7 PREVÁDZKA</h3>
+                <p class="feature-text">Zatiaľ čo ty spíš, naše systémy pracujú. Nepretržitá optimalizácia. Nepretržitý profit.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏗️</div>
+                <h3 class="feature-title">INFRAŠTRUKTÚRA</h3>
+                <p class="feature-text">Nie sme aplikácia. Sme architekti kapitálovej infraštruktúry na ďalších 50 rokov.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">$1.2B</div>
+                <div class="stat-label">KAPACITA</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">PREVÁDZKA</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">ĽUDSKÁ CHYBA</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Challenge Section -->
+    <section class="challenge">
+        <div class="challenge-box">
+            <h2 class="challenge-title">THE MOST WANTED CHALLENGE</h2>
+            <div class="challenge-reward">$100</div>
+            <p class="challenge-text">
+                V našom kóde sa skrýva tajomstvo.<br>
+                Prvý, kto ho rozlúšti, získa odmenu.<br><br>
+                Sleduj @fordfofer na Instagrame.<br>
+                Súťaž práve začala.
+            </p>
+            <a href="https://instagram.com/fordfofer" class="cta-button" target="_blank">
+                ZAPOJ SA →
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://instagram.com/fordfofer" target="_blank">INSTAGRAM</a>
+            <a href="https://twitter.com/fordfofer" target="_blank">TWITTER</a>
+            <a href="https://github.com/shimikohut" target="_blank">GITHUB</a>
+        </div>
+        <p class="copyright">© 2024 FORDFOFER. ALL RIGHTS RESERVED.</p>
+    </footer>
+    
+    <script>
+        // Countdown Timer
+        function startCountdown() {
+            // Set end time to 72 hours from now (or use localStorage to persist)
+            let endTime = localStorage.getItem('fordfofer_countdown');
+            
+            if (!endTime) {
+                endTime = new Date().getTime() + (72 * 60 * 60 * 1000);
+                localStorage.setItem('fordfofer_countdown', endTime);
+            }
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                if (distance < 0) {
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        startCountdown();
+    </script>
+</body>
+</html>
+
