@@ -433,6 +433,57 @@
             </a>
         </div>
     </section>
+
+    <!-- Investment Section -->
+    <section class="challenge" style="padding-top: 2rem;">
+        <div class="challenge-box" style="border-color: #FF004D;">
+            <h2 class="challenge-title">💰 INVESTUJ DO FORDFOFER</h2>
+            <p class="challenge-text">
+                Early investor prístup.<br>
+                Buď súčasťou $1.2B architektúry od začiatku.
+            </p>
+            
+            <!-- UNIFIED PAYMENT - ALL TO SKRILL -->
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                <a href="#" class="cta-button" onclick="showPaymentInfo()" style="background: linear-gradient(135deg, #862165 0%, #FF004D 100%); padding: 1.5rem 3rem; font-size: 1.2rem;">
+                    💰 INVESTUJ TERAZ
+                </a>
+            </div>
+            
+            <div id="paymentInfo" style="display: none; margin-top: 2rem; padding: 2rem; background: #111; border: 2px solid #FF004D; border-radius: 12px;">
+                <p style="color: #FF004D; font-weight: bold; font-size: 1.2rem; margin-bottom: 1.5rem;">💳 VŠETKY PLATBY (vrátane CRYPTO)</p>
+                
+                <div style="background: #1a1a1a; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <p style="color: #888; font-size: 0.8rem; margin-bottom: 0.5rem;">SKRILL EMAIL:</p>
+                    <p style="font-size: 1.5rem; color: #fff; font-family: monospace; user-select: all;">gcapovic.biz@proton.me</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                    <div style="background: #1a1a1a; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 1.5rem;">💳</span>
+                        <p style="font-size: 0.7rem; color: #888; margin-top: 0.5rem;">CARD</p>
+                    </div>
+                    <div style="background: #1a1a1a; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 1.5rem;">₿</span>
+                        <p style="font-size: 0.7rem; color: #888; margin-top: 0.5rem;">CRYPTO</p>
+                    </div>
+                    <div style="background: #1a1a1a; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 1.5rem;">🏦</span>
+                        <p style="font-size: 0.7rem; color: #888; margin-top: 0.5rem;">BANK</p>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.8rem; color: #888; margin-top: 1.5rem; text-align: center;">
+                    Skrill akceptuje karty, crypto aj bankové prevody.<br>
+                    Všetky investície idú priamo na tento účet.
+                </p>
+                
+                <a href="https://www.skrill.com/en/send-money/" target="_blank" class="cta-button" style="display: block; text-align: center; margin-top: 1.5rem; background: #862165;">
+                    OTVORIŤ SKRILL →
+                </a>
+            </div>
+        </div>
+    </section>
     
     <!-- Footer -->
     <footer>
@@ -480,6 +531,13 @@
         }
         
         startCountdown();
+        
+        // Payment Info Toggle - ALL TO SKRILL
+        function showPaymentInfo() {
+            event.preventDefault();
+            const info = document.getElementById('paymentInfo');
+            info.style.display = info.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 </body>
 </html>
